@@ -17,7 +17,7 @@ const books = require("./models/book");
 const MONGO_URL = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
 const FRONTEND = process.env.FRONTEND;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 var corsOptions = {
   origin: FRONTEND, 
