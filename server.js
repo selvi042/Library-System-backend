@@ -30,6 +30,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Health Check Endpoint
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.post("/api/register", async (req, res) => {
   try {
     const password = req.body.password;
@@ -41,7 +46,6 @@ app.post("/api/register", async (req, res) => {
     res.status(200).json(student);
   } catch (error) {
     res.status(500);
-    // throw new Error(error.message);
   }
 });
 
@@ -51,7 +55,6 @@ app.get("/api/students", async (req, res) => {
     res.status(201).json(students);
   } catch (error) {
     res.status(500).json({ error: "Unable to get students" });
-    // throw new Error(error.message);
   }
 });
 
@@ -219,12 +222,7 @@ app.post("/api/add-borrowbook", async (req, res) => {
     status
 
   } = req.body;
-  // const bookExists = await borrowbooksModel.findOne({ bookname: bookname });
-  // if (bookExists) {
-  //   return res
-  //     .status(200)
-  //     .send({ status: "not ok" });
-  // }
+  
   try {
     await borrowbooksModel.create({
       bookname,
